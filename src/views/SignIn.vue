@@ -1,7 +1,7 @@
 <template>
 	<div class="signin-container">
+		<img src="../assets/icon.png" alt="Codeway Logo" class="logo" />
 		<div class="signin-box">
-			<img src="../assets/icon.png" alt="Codeway Logo" class="logo" />
 			<h2>Please sign in</h2>
 			<form @submit.prevent="signIn">
 				<input type="email" placeholder="E-mail address" v-model="password" required />
@@ -31,37 +31,39 @@
 	}
 </script>
 
+<!-- @TODO:
+	Enhance styling to
+	- match sample
+	- be responsive
+-->
 <style scoped>
 .signin-container {
+	width: 100%;
+	height: 100%;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
-	height: 100vh;
-	background-color: linear-gradient(to bottom, #141E30, #243B55);
-}
-
-.signin-box {
-	width: 300px;
-	padding: 20px;
-	background-color: #1E1E1E;
-	border-radius: 8px;
-	text-align: center;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	justify-content: center;
+	position: relative;
+	border: 5px solid green;
 }
 
 .logo {
-	width: 100px;
-	margin-bottom: 20px;
+	width: 14.5vw;
+	height: 16.5vh;
+	margin-bottom: 3vh;
 }
 
-h2 {
-	margin-bottom: 20px;
-	color: #ccc;
-}
-
-form {
+.signin-box {
+	width: 16.8vw;
+	height: 22.1vh;
+	padding: 2vh;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 3px solid red;
 }
 
 input {
