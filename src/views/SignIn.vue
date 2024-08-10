@@ -4,7 +4,7 @@
 		<div class="signin-box">
 			<h2>Please sign in</h2>
 			<form @submit.prevent="signIn">
-				<input type="email" placeholder="E-mail address" v-model="password" required />
+				<input type="email" placeholder="E-mail address" v-model="email" required />
 				<input type="password" placeholder="Password" v-model="password" required />
 				<button type="submit">Sign in</button>
 			</form>
@@ -14,18 +14,32 @@
 </template>
 
 <script>
+import { auth } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+
 	export default {
 		name: "SignIn",
-		data() {
+		setup() {
+			const email = ref('');
+			const password = ref('');
+			const router = useRouter();
+
+			const signIn = async () => {
+				try {
+					await signInWithEmailAndPassword(auth, email.value, password.value);
+					router.push('/');
+				} catch (error) {
+					console.error("Authentication error:", error);
+					alert('Failed to sign in. Please check your credentials and try again.');
+				}
+			}
+
 			return {
-				email: '',
-				password: ''
-			};
-		},
-		methods: {
-			signIn() {
-				// @TODO: Handle sign-in logic
-				console.log("signing in")
+				email,
+				password,
+				signIn
 			}
 		}
 	}
