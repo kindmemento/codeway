@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-		"serve": "vite",
+    "serve": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "firebase": "^10.12.5",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
