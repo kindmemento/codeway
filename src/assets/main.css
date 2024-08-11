@@ -21,3 +21,10 @@ body, html {
   margin: 0 auto;
   font-weight: normal;
 }
+
+@font-face {
+	font-family: 'Gilmer';
+	src: url('./fonts/Gilmer-Medium.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
