@@ -1,10 +1,10 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from './firebase';
+import { collection, getDocs } from "firebase/firestore"
+import { db } from "./firebase"
 
 const getParameters = async () => {
-	const querySnapshot = await getDocs(collection(db, 'parameters'))
+	const querySnapshot = await getDocs(collection(db, "parameters"))
 	const params = []
-	querySnapshot.forEach((doc) => {
+	querySnapshot.forEach(doc => {
 		params.push({ id: doc.id, ...doc.data() })
 	})
 	return params
