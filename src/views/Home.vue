@@ -15,12 +15,16 @@
 				<div class="column">Parameter Key</div>
 				<div class="column">Value</div>
 				<div class="column">Description</div>
-				<div class="column">Create Date</div>
+				<div class="column" v-on:click="toggleSort">
+					Create Date
+					<span v-if="sortOrder === 'desc'">⬇️</span>
+					<span v-else>⬆️</span>
+				</div>
 				<div class="column"></div>
 			</div>
 
 			<div class="rows-container">
-				<div class="row" v-for="param in parameters" :key="param.id">
+				<div class="row" v-for="param in sortedParameters" :key="param.id">
 					<div class="column">{{ param.key }}</div>
 					<div class="column">{{ param.value }}</div>
 					<div class="column">{{ param.description }}</div>
@@ -66,10 +70,29 @@ export default {
 	data() {
 		return {
 			parameters: [],
+			sortOrder: "desc", // Sort params in descending order by default
 		}
+	},
+	computed: {
+		sortedParameters() {
+			let sortedParams = [...this.parameters]
+			sortedParams.sort((a, b) => {
+				if (this.sortOrder === "desc") {
+					return b.created.second - a.created.seconds
+				} else {
+					return a.created.seconds - b.created.seconds
+				}
+			})
+			return sortedParams
+		},
 	},
 	async mounted() {
 		this.parameters = await getParameters()
+	},
+	methods: {
+		toggleSort() {
+			this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc"
+		},
 	},
 }
 </script>
@@ -103,8 +126,9 @@ export default {
 	flex: 1;
 	flex-direction: column;
 	padding: 2rem;
-	color: #FFFFFF;
+	color: #ffffff;
 }
+
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -118,6 +142,10 @@ export default {
 	flex: 1;
 	text-align: left;
 	border-radius: 4px;
+}
+
+.header span {
+	cursor: pointer;
 }
 
 .rows-container {
