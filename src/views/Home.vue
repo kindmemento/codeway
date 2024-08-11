@@ -83,7 +83,7 @@
 				<div class="column"><input type="text" placeholder="Value" /></div>
 				<div class="column"><input type="text" placeholder="New Description" /></div>
 				<div class="column actions">
-					<button class="add-btn">Add</button>
+					<button class="add-btn">ADD</button>
 				</div>
 			</div>
 		</div>
@@ -101,11 +101,10 @@ export default {
 		width: 100vw;
 		height: 100vh;
 		margin: 0;
-		padding: 10px 3vw 10px 3vw;
+		padding: 10px 2vw 10px 2vw;
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
-		/* border: 1px solid red; */
 	}
 
 	.navbar {
@@ -131,7 +130,6 @@ export default {
 		flex: 1;
 		flex-direction: column;
 		padding: 2rem;
-		/* background-color: #1E1E2E; */
 		color: #FFFFFF;
 	}
 
@@ -143,10 +141,12 @@ export default {
 	}
 
 	.header .column {
+		color: rgb(124, 138, 164);
+		font-size: 28px;
+		font-family: 'Gilmer';
 		flex: 1;
-		padding: 0.5rem;
 		text-align: left;
-		/* border: 1px solid yellow; */
+		border: 1px solid red;
 	}
 
 	.rows-container {
@@ -157,17 +157,16 @@ export default {
 	.row {
 		display: flex;
 		justify-content: space-between;
-		padding: 0.5rem;
 		border-radius: 4px;
-		margin-bottom: 0.5rem;
 		/* border: 1px solid red; */
 	}
 
 	.row .column {
 		flex: 1;
-		padding: 0.5rem;
 		text-align: left;
-		/* border: 1px solid yellow; */
+		font-size: 16px;
+		font-family: 'Gilmer';
+		border: 1px solid red;
 	}
 
 	.column .actions {
@@ -182,6 +181,8 @@ export default {
 		border-radius: 4px;
 		cursor: pointer;
 		color: white;
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		font-weight: bold;
 	}
 
 	.edit-btn {
@@ -217,6 +218,5 @@ export default {
 		background: none;
 		color: white;
 	}
-
 
 </style>
