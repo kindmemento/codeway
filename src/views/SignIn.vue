@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { auth } from '../firebase';
+import { auth } from '../auth/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
