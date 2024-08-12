@@ -29,7 +29,7 @@
 					<div class="column">{{ param.value }}</div>
 					<div class="column">{{ param.description }}</div>
 					<div class="column">
-						{{ new Date(param.created.seconds * 1000).toLocaleDateString() }}
+						{{ new Date(param.created._seconds * 1000).toLocaleDateString() }}
 					</div>
 					<div class="column actions">
 						<button class="edit-btn">Edit</button>
@@ -63,7 +63,8 @@
 </template>
 
 <script>
-import { getParameters } from "@/firestore"
+// @TODO: Params will be retrieved from backend
+import { mockParams } from '../util/mockData'
 
 export default {
 	name: "Home",
@@ -78,16 +79,17 @@ export default {
 			let sortedParams = [...this.parameters]
 			sortedParams.sort((a, b) => {
 				if (this.sortOrder === "desc") {
-					return b.created.second - a.created.seconds
+					return b.created._seconds - a.created._seconds
 				} else {
-					return a.created.seconds - b.created.seconds
+					return a.created._seconds - b.created._seconds
 				}
 			})
 			return sortedParams
 		},
 	},
 	async mounted() {
-		this.parameters = await getParameters()
+		// @TODO: Params will be retrieved from backend
+		this.parameters = mockParams
 	},
 	methods: {
 		toggleSort() {
