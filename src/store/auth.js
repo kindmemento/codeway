@@ -21,6 +21,10 @@ export default {
 				throw error
 			}
 		},
+		async fetchUser({ commit }) {
+			const user = auth.currentUser
+			commit('setUser', user)
+		},
 		async signOut({ commit }) {
 			try {
 				await signOut(auth)
@@ -32,8 +36,7 @@ export default {
 		},
 	},
 	getters: {
-		isAuthenticated(state) {
-			return !!state.user
-		},
+		isAuthenticated: (state) => !!state.user,
+		user: (state) => state.user
 	},
 }
