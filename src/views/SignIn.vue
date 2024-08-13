@@ -29,7 +29,7 @@ export default {
 		const signIn = async () => {
 			try {
 				console.log('Attempting to sign in with email:', email.value)
-				await store.dispatch('signIn', { email: email.value, password: password.value })
+				await store.dispatch('auth/signIn', { email: email.value, password: password.value })
 				console.log('Sign in successful, redirecting...')
 				router.push('/')
 			} catch (error) {
