@@ -1,8 +1,7 @@
-import { createStore } from 'vuex'
 import { auth } from '@/auth/firebase'
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
-const store = createStore({
+export default {
 	namespaced: true,
 	state: {
 		user: null,
@@ -40,6 +39,4 @@ const store = createStore({
 		isAuthenticated: state => !!state.user,
 		user: state => state.user,
 	},
-})
-
-export default store
+}
