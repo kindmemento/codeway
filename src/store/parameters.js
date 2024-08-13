@@ -52,11 +52,17 @@ export default {
 		},
 		async updateParameter({ commit }, { id, data }) {
 			try {
+				console.log("param id", id)
+				console.log("req body", data)
 				const response = await apiService.updateParameter(id, data)
 				commit('updateParameter', response.data)
 			} catch (error) {
-				console.error(`Error updating parameter with id ${id}`, error)
-				throw error
+				if (error.response && error.response.status === 409) {
+					alert('Conflict detected: This parameter was updated by another user. Please reload and try again.')
+				} else {
+					console.error(`Error updating parameter with id ${id}`, error)
+					throw error
+				}
 			}
 		}
 	},
