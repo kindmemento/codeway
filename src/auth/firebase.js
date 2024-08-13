@@ -15,7 +15,7 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 
 export const getIdToken = async () => {
-	const user = firebase.auth().currentUser
+	const user = auth.currentUser
 	if (!user) return null
 	return await user.getIdToken()
 }
