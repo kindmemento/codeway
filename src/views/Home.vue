@@ -33,7 +33,7 @@
 					</div>
 					<div class="column actions">
 						<button class="edit-btn">Edit</button>
-						<button class="delete-btn">Delete</button>
+						<button @click="removeParameter(param.id)" class="delete-btn">Delete</button>
 					</div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@ export default {
 		this.$store.dispatch('parameters/fetchParameters')
 	},
 	methods: {
-		...mapActions('parameters', ['createParameter']),
+		...mapActions('parameters', ['createParameter', 'deleteParameter']),
 		async addParameter() {
 			if (this.newParam.key && this.newParam.value && this.newParam.description) {
 				await this.createParameter(this.newParam)
@@ -106,6 +106,13 @@ export default {
 		toggleSort() {
 			this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc"
 		},
+		async removeParameter(id) {
+			try {
+				await this.deleteParameter(id)
+			} catch (error) {
+				console.error(`Failed to delete parameter with id ${id}:`, error)
+			}
+		}
 	},
 }
 </script>
