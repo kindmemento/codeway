@@ -1,4 +1,5 @@
-import firebase from 'firebase/app'
+import { auth } from '@/auth/firebase'
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 export default {
 	namespaced: true,
@@ -12,12 +13,22 @@ export default {
 	},
 	actions: {
 		async signIn({ commit }, { email, password }) {
-			const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password)
-			commit('setUser', userCredential.user)
+			try {
+				const userCredential = await signInWithEmailAndPassword(auth, email, password)
+				commit('setUser', userCredential.user)
+			} catch (error) {
+				console.error('Error during sign in:', error)
+				throw error
+			}
 		},
 		async signOut({ commit }) {
-			await firebase.auth().signOut()
-			commit('setUser', null)
+			try {
+				await signOut(auth)
+				commit('setUser', null)
+			} catch (error) {
+				console.error('Error during sign out:', error)
+				throw error
+			}
 		},
 	},
 	getters: {
