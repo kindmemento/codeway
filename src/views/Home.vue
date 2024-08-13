@@ -41,41 +41,45 @@
 			<div class="add-row-container">
 				<div class="column">
 					<div class="input-container">
-						<input type="text" placeholder="New Parameter" />
+						<input v-model="newParam.key" type="text" placeholder="New Parameter" />
 					</div>
 				</div>
 				<div class="column">
 					<div class="input-container">
-						<input type="text" placeholder="Value" />
+						<input v-model="newParam.value" type="text" placeholder="Value" />
 					</div>
 				</div>
 				<div class="column description-column">
 					<div class="input-container">
-						<input type="text" placeholder="New Description" />
+						<input v-model="newParam.description" type="text" placeholder="New Description" />
 					</div>
 				</div>
 				<div class="column actions">
-					<button class="add-btn">ADD</button>
+					<button @click="addParameter" class="add-btn">ADD</button>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </template>
 
 <script>
-// @TODO: Params will be retrieved from backend
-import { mockParams } from '../util/mockData'
-import apiService from '@/api/apiService'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	name: "Home",
 	data() {
 		return {
-			parameters: [],
+			newParam: {
+				key: '',
+				value: '',
+				description: '',
+			},
 			sortOrder: "desc", // Sort params in descending order by default
 		}
 	},
 	computed: {
+		...mapGetters('parameters', ['parameters']),
 		sortedParameters() {
 			let sortedParams = [...this.parameters]
 			sortedParams.sort((a, b) => {
@@ -89,15 +93,22 @@ export default {
 		},
 	},
 	async mounted() {
-		try {
-			const params = await apiService.getAllParameters()
-			this.parameters = params.data
-		} catch (error) {
-			console.error('Failed to retrieve parameters from server:', error)
-			throw error
-		}
+		this.$store.dispatch('parameters/fetchParameters')
+		// console.log("this.store", this.$store)
+		// console.log("this.store.parameters", this.$store.parameters)
+		// this.parameters = this.$store.parameters
+		// console.log("home this.parameters", this.parameters)
 	},
 	methods: {
+		...mapActions('parameters', ['createParameter']),
+		async addParameter() {
+			if (this.newParam.key && this.newParam.value && this.newParam.description) {
+				console.log("inside add parameter")
+				console.log("newParam", newParam)
+				await this.createParameter(this.newParam)
+				this.newParam = { key: '', value: '', description: '' } // To reset the form
+			}
+		},
 		toggleSort() {
 			this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc"
 		},
