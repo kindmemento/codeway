@@ -25,9 +25,6 @@ apiClient.interceptors.request.use(
 				// For create, read, and delete operations, attach the predefined API token
 				config.headers.Authorization = `Bearer ${API_TOKEN}`
 			}
-
-			// @TODO: Log for development - remove before deployment
-			console.log(`Authorization header set with token: ${token || API_TOKEN}`)
 		} catch (error) {
 			console.error('Error attaching token to request:', error)
 		}
