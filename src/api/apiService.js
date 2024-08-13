@@ -7,25 +7,36 @@ const API_BASE_URL = import.meta.env.VITE_NEURALBASE_BASE_URL
 const apiClient = axios.create({
 	baseUrl: API_BASE_URL,
 	headers: {
-		'Content-Type': 'application/json'
-	}
+		'Content-Type': 'application/json',
+	},
 })
 
-apiClient.interceptors.request.use(async (config) => {
-	const idToken = await getIdToken()
-	if (config.method === 'put') {
-		// For update requests, send Firebase ID Token in authorization header
-		if (idToken) {
-			config.headers.Authorization = `Bearer ${idToken}`
+apiClient.interceptors.request.use(
+	async config => {
+		try {
+			if (config.method === 'put') {
+				// For update requests, attach the Firebase ID token
+				const token = await getIdToken()
+				if (token) {
+					config.headers.Authorization = `Bearer ${token}`
+				}
+			} else {
+				// For create, read, and delete operations, attach the predefined API token
+				config.headers.Authorization = `Beare ${API_TOKEN}`
+			}
+
+			// @TODO: Log for development - remove before deployment
+			console.log(`Authorization header set with token: ${token || API_TOKEN}`)
+		} catch (error) {
+			console.error('Error attaching token to request:', error)
 		}
-	} else {
-		// For create, read and delete operations, send predefined API Token
-		config.headers.Authorization = `Bearer ${API_TOKEN}`
+
+		return config
+	},
+	error => {
+		return Promise.reject(error)
 	}
-	return config
-}, (error) => {
-	return Promise.reject(error)
-})
+)
 
 export default {
 	getAllParameters() {
@@ -39,5 +50,5 @@ export default {
 	},
 	deleteParameter(id) {
 		return apiClient.delete(`/panel/parameters/${id}`)
-	}
+	},
 }
