@@ -35,7 +35,7 @@ export default {
 		return apiClient.post('/panel/parameters', data)
 	},
 	updateParameter(id, data) {
-		return apiClient.put(`/panel/parameters/${id}`)
+		return apiClient.put(`/panel/parameters/${id}`, data)
 	},
 	deleteParameter(id) {
 		return apiClient.delete(`/panel/parameters/${id}`)
