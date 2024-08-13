@@ -25,16 +25,56 @@
 
 			<div class="rows-container">
 				<div class="row" v-for="param in sortedParameters" :key="param.id">
-					<div class="column">{{ param.key }}</div>
-					<div class="column">{{ param.value }}</div>
-					<div class="column">{{ param.description }}</div>
+
+					<div class="column">
+						<input
+							v-if="param.id === editingParamId"
+							v-model="editedParam.key"
+							type="text"
+							:placeholder="param.key"
+						/>
+						<span v-else>{{ param.key }}</span>
+					</div>
+					<div class="column">
+						<input
+							v-if="param.id === editingParamId"
+							v-model="editedParam.value"
+							type="text"
+							:placeholder="param.value"
+						/>
+						<span v-else>{{ param.value }}</span>
+					</div>
+					<div class="column">
+						<input
+							v-if="param.id === editingParamId"
+							v-model="editedParam.description"
+							type="text"
+							:placeholder="param.description"
+						/>
+						<span v-else>{{ param.description }}</span>
+					</div>
 					<div class="column">
 						{{ new Date(param.created._seconds * 1000).toLocaleDateString() }}
+						<div v-if="param.last_updated">
+							<small
+								>Last updated:
+								{{ new Date(param.last_updated._seconds * 1000).toLocaleString() }}
+							</small>
+						</div>
 					</div>
+
 					<div class="column actions">
-						<button class="edit-btn">Edit</button>
+						<button
+							v-if="param.id === editingParamId"
+							@click="submitEdit(param.id)"
+							class="edit-btn"
+						>
+							Submit
+						</button>
+						<button v-else @click="enableEdit(param)" class="edit-btn">Edit</button>
 						<button @click="removeParameter(param.id)" class="delete-btn">Delete</button>
 					</div>
+
 				</div>
 			</div>
 
@@ -58,7 +98,6 @@
 					<button @click="addParameter" class="add-btn">ADD</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </template>
@@ -67,15 +106,21 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-	name: "Home",
+	name: 'Home',
 	data() {
 		return {
+			sortOrder: 'desc', // Sort params in descending order by default
 			newParam: {
 				key: '',
 				value: '',
 				description: '',
 			},
-			sortOrder: "desc", // Sort params in descending order by default
+			editingParamId: null,
+			editedParam: {
+				key: '',
+				value: '',
+				description: ''
+			}
 		}
 	},
 	computed: {
@@ -83,7 +128,7 @@ export default {
 		sortedParameters() {
 			let sortedParams = [...this.parameters]
 			sortedParams.sort((a, b) => {
-				if (this.sortOrder === "desc") {
+				if (this.sortOrder === 'desc') {
 					return b.created._seconds - a.created._seconds
 				} else {
 					return a.created._seconds - b.created._seconds
@@ -96,22 +141,26 @@ export default {
 		this.$store.dispatch('parameters/fetchParameters')
 	},
 	methods: {
-		...mapActions('parameters', ['createParameter', 'deleteParameter']),
+		...mapActions('parameters', ['createParameter', 'deleteParameter', 'updateParameter']),
 		async addParameter() {
 			if (this.newParam.key && this.newParam.value && this.newParam.description) {
 				await this.createParameter(this.newParam)
-				this.newParam = { key: '', value: '', description: '' } // To reset the form
+				this.newParam = { key: '', value: '', description: '' } // Reset the form
 			}
 		},
 		toggleSort() {
-			this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc"
+			this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc'
 		},
-		async removeParameter(id) {
-			try {
-				await this.deleteParameter(id)
-			} catch (error) {
-				console.error(`Failed to delete parameter with id ${id}:`, error)
-			}
+		removeParameter(id) {
+			this.deleteParameter(id)
+		},
+		enableEdit(param) {
+			this.editingParamId = param.id
+			this.editedParam = { ...param }
+		},
+		async submitEdit(id) {
+			await this.updateParameter({ id, data: this.editedParam })
+			this.editingParamId = null // Disable editing mode
 		}
 	},
 }
@@ -158,7 +207,7 @@ export default {
 .header .column {
 	color: rgb(124, 138, 164);
 	font-size: 28px;
-	font-family: "Gilmer";
+	font-family: 'Gilmer';
 	flex: 1;
 	text-align: left;
 	border-radius: 4px;
@@ -183,7 +232,7 @@ export default {
 	flex: 1;
 	text-align: left;
 	font-size: 16px;
-	font-family: "Gilmer";
+	font-family: 'Gilmer';
 }
 
 .column .actions {
@@ -241,6 +290,6 @@ export default {
 	border-radius: 4px;
 	background: none;
 	color: white;
-	font-family: "Gilmer";
+	font-family: 'Gilmer';
 }
 </style>
