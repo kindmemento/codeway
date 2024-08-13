@@ -65,6 +65,7 @@
 <script>
 // @TODO: Params will be retrieved from backend
 import { mockParams } from '../util/mockData'
+import apiService from '@/api/apiService'
 
 export default {
 	name: "Home",
@@ -88,8 +89,13 @@ export default {
 		},
 	},
 	async mounted() {
-		// @TODO: Params will be retrieved from backend
-		this.parameters = mockParams
+		try {
+			const params = await apiService.getAllParameters()
+			this.parameters = params.data
+		} catch (error) {
+			console.error('Failed to retrieve parameters from server:', error)
+			throw error
+		}
 	},
 	methods: {
 		toggleSort() {
