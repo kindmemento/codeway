@@ -22,7 +22,7 @@ apiClient.interceptors.request.use(
 				}
 			} else {
 				// For create, read, and delete operations, attach the predefined API token
-				config.headers.Authorization = `Beare ${API_TOKEN}`
+				config.headers.Authorization = `Bearer ${API_TOKEN}`
 			}
 
 			// @TODO: Log for development - remove before deployment
