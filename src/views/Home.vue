@@ -94,17 +94,11 @@ export default {
 	},
 	async mounted() {
 		this.$store.dispatch('parameters/fetchParameters')
-		// console.log("this.store", this.$store)
-		// console.log("this.store.parameters", this.$store.parameters)
-		// this.parameters = this.$store.parameters
-		// console.log("home this.parameters", this.parameters)
 	},
 	methods: {
 		...mapActions('parameters', ['createParameter']),
 		async addParameter() {
 			if (this.newParam.key && this.newParam.value && this.newParam.description) {
-				console.log("inside add parameter")
-				console.log("newParam", newParam)
 				await this.createParameter(this.newParam)
 				this.newParam = { key: '', value: '', description: '' } // To reset the form
 			}
