@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import { auth } from '@/auth/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
@@ -25,11 +24,12 @@ export default {
 		const email = ref('')
 		const password = ref('')
 		const router = useRouter()
+		const store = useStore()
 
 		const signIn = async () => {
 			try {
 				console.log('Attempting to sign in with email:', email.value)
-				await signInWithEmailAndPassword(auth, email.value, password.value)
+				await store.dispatch('signIn', { email: email.value, password: password.value })
 				console.log('Sign in successful, redirecting...')
 				router.push('/')
 			} catch (error) {
