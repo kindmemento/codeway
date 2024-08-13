@@ -15,6 +15,12 @@ export default {
 		removeParameter(state, id) {
 			state.parameters = state.parameters.filter(param => param.id !== id)
 		},
+		updateParameter(state, updatedParam) {
+			const index = state.parameters.findIndex(param => param.id === updatedParam.id)
+			if (index !== -1) {
+				state.parameters.splice(index, 1, updatedParam)
+			}
+		}
 	},
 	actions: {
 		async fetchParameters({ commit }) {
@@ -44,6 +50,15 @@ export default {
 				throw error
 			}
 		},
+		async updateParameter({ commit }, { id, data }) {
+			try {
+				const response = await apiService.updateParameter(id, data)
+				commit('updateParameter', response.data)
+			} catch (error) {
+				console.error(`Error updating parameter with id ${id}`, error)
+				throw error
+			}
+		}
 	},
 	getters: {
 		parameters: state => state.parameters,
