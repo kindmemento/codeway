@@ -26,3 +26,18 @@ apiClient.interceptors.request.use(async (config) => {
 }, (error) => {
 	return Promise.reject(error)
 })
+
+export default {
+	getAllParameters() {
+		return apiClient.get('/panel/parameters')
+	},
+	createParameter(data) {
+		return apiClient.post('/panel/parameters', data)
+	},
+	updateParameter(id, data) {
+		return apiClient.put(`/panel/parameters/${id}`)
+	},
+	deleteParameter(id) {
+		return apiClient.delete(`/panel/parameters/${id}`)
+	}
+}
