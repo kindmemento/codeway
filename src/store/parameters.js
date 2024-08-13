@@ -12,7 +12,7 @@ export default {
 		addParameter(state, parameter) {
 			state.parameters.push(parameter)
 		},
-		removeParameter(state, parameter) {
+		removeParameter(state, id) {
 			state.parameters = state.parameters.filter(param => param.id !== id)
 		},
 	},
