@@ -14,35 +14,37 @@
 </template>
 
 <script>
-import { auth } from '../auth/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { auth } from '@/auth/firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
-	export default {
-		name: "SignIn",
-		setup() {
-			const email = ref('');
-			const password = ref('');
-			const router = useRouter();
+export default {
+	name: 'SignIn',
+	setup() {
+		const email = ref('')
+		const password = ref('')
+		const router = useRouter()
 
-			const signIn = async () => {
-				try {
-					await signInWithEmailAndPassword(auth, email.value, password.value);
-					router.push('/');
-				} catch (error) {
-					console.error("Authentication error:", error);
-					alert('Failed to sign in. Please check your credentials and try again.');
-				}
-			}
-
-			return {
-				email,
-				password,
-				signIn
+		const signIn = async () => {
+			try {
+				console.log('Attempting to sign in with email:', email.value)
+				await signInWithEmailAndPassword(auth, email.value, password.value)
+				console.log('Sign in successful, redirecting...')
+				router.push('/')
+			} catch (error) {
+				console.error('Authentication error:', error)
+				alert('Failed to sign in. Please check your credentials and try again.')
 			}
 		}
-	}
+
+		return {
+			email,
+			password,
+			signIn,
+		}
+	},
+}
 </script>
 
 <!-- @TODO:
@@ -95,7 +97,7 @@ input::placeholder {
 
 button {
 	padding: 10px;
-	background-color: #3B82F6;
+	background-color: #3b82f6;
 	border: none;
 	border-radius: 4px;
 	color: #fff;
@@ -105,7 +107,7 @@ button {
 }
 
 button:hover {
-	background-color: #2563EB;
+	background-color: #2563eb;
 }
 
 p {
