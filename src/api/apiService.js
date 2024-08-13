@@ -5,7 +5,7 @@ const API_TOKEN = import.meta.env.VITE_API_TOKEN
 const API_BASE_URL = import.meta.env.VITE_NEURALBASE_BASE_URL
 
 const apiClient = axios.create({
-	baseUrl: API_BASE_URL,
+	baseURL: API_BASE_URL,
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -14,9 +14,10 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
 	async config => {
 		try {
+			let token
 			if (config.method === 'put') {
 				// For update requests, attach the Firebase ID token
-				const token = await getIdToken()
+				token = await getIdToken()
 				if (token) {
 					config.headers.Authorization = `Bearer ${token}`
 				}
@@ -33,7 +34,14 @@ apiClient.interceptors.request.use(
 
 		return config
 	},
+	response => {
+		console.log('Response Status:', response.status)
+		console.log('Response Headers:', response.headers)
+		console.log('Response Data:', response.data)
+		return response
+	},
 	error => {
+		console.error('Response Error:', error.response ? error.response.data : error.message)
 		return Promise.reject(error)
 	}
 )
