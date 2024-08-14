@@ -94,7 +94,7 @@
 						</div>
 					</div>
 					<div class="column actions">
-						<button @click="addParameter" class="add-btn">ADD</button>
+						<button @click="createParameter" class="add-btn">ADD</button>
 					</div>
 				</div>
 			</div>
@@ -109,31 +109,31 @@ export default {
 	name: 'WebHomePage',
 	setup() {
 		const {
+			sortOrder,
 			sortedParameters,
 			newParam,
 			createParameter,
 			enableEdit,
 			deleteParameter,
+			submitEdit,
 			editingParamId,
 			editedParam,
-			isDropdownVisible,
-			showDropdown,
-			hideDropdown,
 			toggleSort,
+			isDropdownVisible,
 		} = useParameterLogic()
 
 		return {
+			sortOrder,
 			sortedParameters,
 			newParam,
 			createParameter,
 			enableEdit,
-			deleteParameter,
+			removeParameter: deleteParameter,
+			submitEdit,
 			editingParamId,
 			editedParam,
-			isDropdownVisible,
-			showDropdown,
-			hideDropdown,
 			toggleSort,
+			isDropdownVisible,
 		}
 	},
 }
@@ -244,7 +244,6 @@ export default {
 }
 
 .description-column {
-	/* border: 1px solid red; */
 	margin-right: 20px;
 }
 
@@ -287,7 +286,7 @@ export default {
 	background: linear-gradient(to bottom, rgb(92, 200, 212), rgb(73, 162, 228));
 }
 
-.add-row-container  {
+.add-row-container {
 	display: flex;
 	border-radius: 4px;
 }
@@ -305,12 +304,13 @@ export default {
 .input-container {
 	display: flex;
 	flex: 1;
-	padding: 0.5rem 2rem 0 0;
 }
 
-.add-row-container input {
+.add-row-container input,
+.column input {
 	width: 100%;
 	padding: 0.5rem;
+	margin-right: 20px;
 	border: 1px solid #444;
 	border-radius: 4px;
 	background: none;
