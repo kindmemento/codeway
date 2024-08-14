@@ -31,12 +31,6 @@ apiClient.interceptors.request.use(
 
 		return config
 	},
-	response => {
-		console.log('Response Status:', response.status)
-		console.log('Response Headers:', response.headers)
-		console.log('Response Data:', response.data)
-		return response
-	},
 	error => {
 		console.error('Response Error:', error.response ? error.response.data : error.message)
 		return Promise.reject(error)
