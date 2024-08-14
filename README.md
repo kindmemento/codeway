@@ -30,7 +30,7 @@ Create a .env file in the root of your project with the following variables:
 
 ### Installation
 1. Clone the repository:\
-`https://gitlab.com/cortexconfig/visionary.git`
+`git clone https://gitlab.com/cortexconfig/visionary.git`
 
 2. Install dependencies:\
 `npm install`
