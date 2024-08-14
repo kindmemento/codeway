@@ -154,7 +154,6 @@ export default {
 }
 </script>
 
-<!-- @TODO: Handle CSS -->
 <style scoped>
 .mobile-home {
 	width: 100vw;
@@ -169,7 +168,7 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	height: min-content;
+	min-height: 60px;
 	padding: 10px;
 }
 
@@ -185,6 +184,32 @@ export default {
 
 .profile img {
 	height: 45px;
+}
+
+.dropdown-menu {
+	display: flex;
+	justify-content: center;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	width: 100%;
+}
+
+.dropdown-item {
+	text-wrap: nowrap;
+	padding: 5px 10px;
+	color: white;
+	border: 1px solid #444;
+	border-radius: 6px;
+	background: transparent;
+	text-align: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.dropdown-item:hover {
+	background-color: red;
+	transition: all 0.3s;
 }
 
 .rows-container {
