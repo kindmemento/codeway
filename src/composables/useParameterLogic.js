@@ -1,4 +1,3 @@
-// src/composables/useParameterLogic.js
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useStore } from 'vuex'
 
