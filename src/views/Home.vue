@@ -4,9 +4,11 @@
 			<div class="logo">
 				<img src="../assets/icon.png" alt="Codeway Logo" />
 			</div>
-			<div class="profile">
-				<!-- @TODO: Replace with profile logo -->
-				<img src="../assets/icon.png" alt="Profile Logo" />
+			<div class="profile" @mouseenter="showDropdown" @mouseleave="hideDropdown">
+				<img src="../assets/profile-icon.png" alt="Profile Logo" />
+				<div v-if="isDropdownVisible" class="dropdown-menu">
+					<button @click="signOut" class="dropdown-item">Sign Out</button>
+				</div>
 			</div>
 		</nav>
 
@@ -25,7 +27,6 @@
 
 			<div class="rows-container">
 				<div class="row" v-for="param in sortedParameters" :key="param.id">
-
 					<div class="column">
 						<input
 							v-if="param.id === editingParamId"
@@ -74,7 +75,6 @@
 						<button v-else @click="enableEdit(param)" class="edit-btn">Edit</button>
 						<button @click="removeParameter(param.id)" class="delete-btn">Delete</button>
 					</div>
-
 				</div>
 			</div>
 
@@ -119,8 +119,9 @@ export default {
 			editedParam: {
 				key: '',
 				value: '',
-				description: ''
-			}
+				description: '',
+			},
+			isDropdownVisible: false,
 		}
 	},
 	computed: {
@@ -136,9 +137,6 @@ export default {
 			})
 			return sortedParams
 		},
-	},
-	async mounted() {
-		this.$store.dispatch('parameters/fetchParameters')
 	},
 	methods: {
 		...mapActions('parameters', ['createParameter', 'deleteParameter', 'updateParameter']),
@@ -161,7 +159,20 @@ export default {
 		async submitEdit(id) {
 			await this.updateParameter({ id, data: this.editedParam })
 			this.editingParamId = null // Disable editing mode
-		}
+		},
+		showDropdown() {
+			this.isDropdownVisible = true
+		},
+		hideDropdown() {
+			this.isDropdownVisible = false
+		},
+	},
+	async mounted() {
+		this.$store.dispatch('parameters/fetchParameters')
+		document.addEventListener('click', this.handleClickOutside)
+	},
+	beforeUnmount() {
+		document.removeEventListener('click', this.handleClickOutside)
 	},
 }
 </script>
@@ -186,8 +197,40 @@ export default {
 	padding: 10px;
 }
 
-.navbar img {
+.logo img {
 	height: 30px;
+}
+
+.profile {
+	position: relative;
+	display: flex;
+	padding: 0 25px;
+}
+
+.profile img {
+	height: 45px;
+}
+
+.dropdown-menu {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	border: 1px solid #ccc;
+	background: white;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	width: 100%;
+	padding: 5px 0;
+}
+
+.dropdown-item {
+	border: none;
+	background: transparent;
+	text-align: center;
+	justify-content: center;
+	cursor: pointer;
 }
 
 .body-container {
