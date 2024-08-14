@@ -10,6 +10,9 @@ export default {
 		setUser(state, user) {
 			state.user = user
 		},
+		clearState(state) {
+			state.user = null
+		}
 	},
 	actions: {
 		async signIn({ commit }, { email, password }) {
@@ -28,7 +31,7 @@ export default {
 		async signOut({ commit }) {
 			try {
 				await signOut(auth)
-				commit('setUser', null)
+				commit('clearState')
 			} catch (error) {
 				console.error('Error during sign out:', error)
 				throw error
