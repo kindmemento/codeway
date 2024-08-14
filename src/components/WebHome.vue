@@ -8,7 +8,8 @@
 
 			<div class="profile" @mouseenter="showDropdown" @mouseleave="hideDropdown">
 				<img src="../assets/profile-icon.png" alt="Profile Logo" />
-				<div v-if="isDropdownVisible" class="dropdown-menu">
+				<!-- @TODO: check issue below -->
+				<div class="dropdown-menu"> 
 					<button @click="signOut" class="dropdown-item">Sign Out</button>
 				</div>
 			</div>
@@ -120,6 +121,7 @@ export default {
 			editedParam,
 			toggleSort,
 			isDropdownVisible,
+			signOut
 		} = useParameterLogic()
 
 		return {
@@ -134,6 +136,7 @@ export default {
 			editedParam,
 			toggleSort,
 			isDropdownVisible,
+			signOut
 		}
 	},
 }
