@@ -23,9 +23,10 @@ Create a .env file in the root of your project with the following variables:
 	VITE_FIREBASE_FIREBASE_APP_ID=
 	VITE_FIREBASE_MEASUREMENT_ID=
 	VITE_NEURALBASE_BASE_URL=
-	VITE_API_TOKEN=IikZW3r6JKUYuCz4Q0dnokLlzBjYzo9lK_QsHr33FYI
+	VITE_API_TOKEN=
 
-	- Backend project runs on port 3000 by default. If you want to run the project locally, enter `http://localhost:3000/api` for the field `VITE_NEURALBASE_BASE_URL`
+- Backend project runs on port 3000 by default. If you want to run the project locally, enter `http://localhost:3000/api` for the field `VITE_NEURALBASE_BASE_URL`
+- **FOR EASE OF USE ONLY,** I've included my own Firebase credentials to speed up setup time. You can just copy the contents from `.env.example` file included in project root.
 
 ### Installation
 1. Clone the repository:
@@ -53,3 +54,11 @@ npm run build
 ### Usage
 	- Login: Users must authenticate using their email and password.
 	- Manage Parameters: Users can view, add, edit, and delete parameters.
+
+	- If you use my credentials to set up the project, you can use the credentials below to authenticate
+
+		email: test@codeway.co
+		password: 123456
+
+		email: test2@codeway.co
+		password: 123456
