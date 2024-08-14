@@ -8,8 +8,7 @@
 
 			<div class="profile" @mouseenter="showDropdown" @mouseleave="hideDropdown">
 				<img src="../assets/profile-icon.png" alt="Profile Logo" />
-				<!-- @TODO: check issue below -->
-				<div class="dropdown-menu"> 
+				<div v-if="isDropdownVisible" class="dropdown-menu"> 
 					<button @click="signOut" class="dropdown-item">Sign Out</button>
 				</div>
 			</div>
@@ -121,6 +120,8 @@ export default {
 			editedParam,
 			toggleSort,
 			isDropdownVisible,
+			showDropdown,
+			hideDropdown,
 			signOut
 		} = useParameterLogic()
 
@@ -136,6 +137,8 @@ export default {
 			editedParam,
 			toggleSort,
 			isDropdownVisible,
+			showDropdown,
+			hideDropdown,
 			signOut
 		}
 	},
@@ -156,6 +159,7 @@ export default {
 .navbar {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -169,12 +173,11 @@ export default {
 .profile {
 	position: relative;
 	display: flex;
-	padding: 0 25px;
 	cursor: pointer;
 }
 
 .profile img {
-	height: 45px;
+	height: 40px;
 }
 
 .dropdown-menu {
@@ -188,6 +191,7 @@ export default {
 }
 
 .dropdown-item {
+	text-wrap: nowrap;
 	padding: 5px 10px;
 	color: white;
 	border: 1px solid #444;
@@ -238,6 +242,7 @@ export default {
 .row {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	border-radius: 4px;
 }
 
@@ -248,24 +253,15 @@ export default {
 	text-align: left;
 	font-size: 16px;
 	font-family: 'Gilmer';
-}
-
-.description-column {
-	margin-right: 20px;
+	margin-top: 6px;
+	margin-bottom: 6px;
 }
 
 .description-span {
 	display: flex;
 	flex: 2;
-	/* white-space: nowrap; */
 	overflow: hidden;
-	text-overflow: ellipsis;
-	display: inline-block;
 	max-width: 100%;
-}
-
-.column .actions {
-	display: flex;
 }
 
 .edit-btn,
@@ -325,54 +321,4 @@ export default {
 	font-family: 'Gilmer';
 }
 
-@media only screen and (max-device-width: 576px) {
-	.home {
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-		width: 100vw;
-		height: 100vh;
-		padding: 10px 2vw 10px 2vw;
-		border: 1px solid red;
-	}
-
-	.navbar {
-		border: 1px solid red;
-		display: flex;
-		align-items: center;
-		height: min-content;
-	}
-
-	.logo img {
-		height: 35px;
-	}
-
-	.profile {
-		display: flex;
-	}
-
-	.profile img {
-		height: 45px;
-	}
-
-	.dropdown-menu {
-		display: flex;
-		border: 1px solid #ccc;
-		background: white;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	}
-
-	.dropdown-item {
-		border: none;
-		background: transparent;
-		text-align: center;
-		justify-content: center;
-		cursor: pointer;
-	}
-
-	.body-container {
-		display: flex;
-		flex-direction: row;
-	}
-}
 </style>
