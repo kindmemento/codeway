@@ -142,11 +142,6 @@ button {
 	font-size: 16px;
 }
 
-/* @TODO: Implement media queries */
-/* Media queries for responsiveness */
-@media (min-width: 576px) {
-}
-
 @media (max-width: 768px) {
 	.logo {
 		max-width: 150px;
