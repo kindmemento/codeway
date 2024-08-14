@@ -84,11 +84,11 @@
 				</div>
 
 				<div class="row">
-					<input v-model="newParam.key" type="text" placeholder="Value" />
+					<input v-model="newParam.value" type="text" placeholder="Value" />
 				</div>
 
 				<div class="row">
-					<input v-model="newParam.key" type="text" placeholder="New Description" />
+					<input v-model="newParam.description" type="text" placeholder="New Description" />
 				</div>
 
 				<div class="row actions">
