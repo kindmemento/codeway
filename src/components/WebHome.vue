@@ -183,20 +183,24 @@ export default {
 	position: absolute;
 	top: 100%;
 	left: 0;
-	border: 1px solid #ccc;
-	background: white;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	z-index: 1000;
 	width: 100%;
-	padding: 5px 0;
 }
 
 .dropdown-item {
-	border: none;
+	padding: 5px 10px;
+	color: white;
+	border: 1px solid #444;
+	border-radius: 6px;
 	background: transparent;
 	text-align: center;
 	justify-content: center;
 	cursor: pointer;
+}
+
+.dropdown-item:hover {
+	background-color: red;
+	transition: all 0.3s;
 }
 
 .body-container {
