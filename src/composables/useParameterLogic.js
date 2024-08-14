@@ -1,8 +1,10 @@
+import { useRouter } from 'vue-router'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useStore } from 'vuex'
 
 export function useParameterLogic() {
 	const store = useStore()
+	const router = useRouter()
 
 	// State
 	const sortOrder = ref('desc')
@@ -75,6 +77,11 @@ export function useParameterLogic() {
 		}
 	}
 
+	const signOut = async () => {
+		await store.dispatch('auth/signOut')
+		router.push('/signin')
+	}
+
 	onMounted(() => {
 		store.dispatch('parameters/fetchParameters')
 		document.addEventListener('click', handleClickOutside)
@@ -104,5 +111,6 @@ export function useParameterLogic() {
 		showDropdown,
 		hideDropdown,
 		checkMobile,
+		signOut
 	}
 }
