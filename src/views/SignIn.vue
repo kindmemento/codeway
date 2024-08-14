@@ -59,42 +59,43 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
 	font-family: 'Gilmer', sans-serif;
-	min-width: 50vw;
+	height: auto;
+	width: auto;
+	margin-bottom: 100px;
 }
 
 .logo {
-	max-width: 200px;
+	max-width: 250px;
 	margin-bottom: 20px;
 }
 
 h2 {
 	color: rgb(50, 50, 91);
-	margin-bottom: 25px;
+	margin-bottom: 10px;
 	font-size: 24px;
 }
 
 .signin-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	border-radius: 10px;
 	padding: 20px;
 	text-align: center;
-}
-
-.title {
-	color: #fff;
-	margin-bottom: 20px;
+	min-width: 30vw;
 }
 
 .input-container {
 	display: flex;
 	flex-direction: column;
-	width: 30vw;
+	width: 100%;
+	min-width: 15vw;
 }
 
 input {
 	width: 100%;
-	padding: 10px 8px;
+	padding: 12px 8px;
 	border: 1px solid rgb(47, 54, 83);
 	background: none;
 	color: rgb(110, 116, 123);
@@ -115,7 +116,12 @@ input:focus {
 	outline: none;
 }
 
+input::placeholder {
+	font-size: 16px;
+}
+
 .button-container {
+	widows: 100%;
 	margin-top: 10px;
 }
 
@@ -140,18 +146,21 @@ button {
 /* @TODO: Implement media queries */
 /* Media queries for responsiveness */
 @media (min-width: 576px) {
-	.signin-container {
-		height: auto;
-		padding: 20px;
-	}
-
-	.signin-box {
-		max-width: 400px;
-		padding: 30px;
-	}
 }
 
-@media (min-width: 768px) {
-	/* Add styles for larger screens */
+@media (max-width: 768px) {
+	.logo {
+		max-width: 150px;
+		margin-bottom: 20px;
+	}
+	.copyright {
+		font-size: 0.8rem;
+		text-wrap: nowrap;
+	}
+
+	h2 {
+		font-size: 20px;
+		text-wrap: nowrap;
+	}
 }
 </style>
