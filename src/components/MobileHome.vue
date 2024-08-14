@@ -14,9 +14,57 @@
 				</div>
 			</div>
 		</nav>
+
+		<!-- Parameter Boxes -->
 		<div class="rows-container">
 			<div class="param-box" v-for="param in sortedParameters" :key="param.id">
-				<!-- param details for mobile layout -->
+				
+				<div class="row">
+					<input
+							v-if="param.id === editingParamId"
+							v-model="editedParam.key"
+							type="text"
+							:placeholder="param.key"
+						/>
+						<span v-else>{{ param.key }}</span>
+				</div>
+
+				<div class="row">
+					<input
+							v-if="param.id === editingParamId"
+							v-model="editedParam.value"
+							type="text"
+							:placeholder="param.value"
+						/>
+						<span v-else>{{ param.value }}</span>
+				</div>
+
+				<div class="row">
+					<input
+							v-if="param.id === editingParamId"
+							v-model="editedParam.description"
+							type="text"
+							:placeholder="param.description"
+						/>
+						<span class="description-span" v-else>{{ param.description }}</span>
+				</div>
+
+				<div class="row">
+					{{ new Date(param.created._seconds * 1000).toLocaleString() }}
+				</div>
+
+				<div class="actions">
+					<button
+							v-if="param.id === editingParamId"
+							@click="submitEdit(param.id)"
+							class="edit-btn"
+						>
+							Submit
+						</button>
+						<button v-else @click="enableEdit(param)" class="edit-btn">Edit</button>
+						<button @click="removeParameter(param.id)" class="delete-btn">Delete</button>
+				</div>
+
 			</div>
 			<div class="param-box add-new">
 				<!-- add new param form for mobile layout -->
@@ -70,8 +118,7 @@ export default {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
-	justify-content: center;
-	flex-direction: row;
+	flex-direction: column;
 }
 
 .navbar {
@@ -81,7 +128,6 @@ export default {
 	width: 100%;
 	height: min-content;
 	padding: 10px;
-	border: 1px solid red;
 }
 
 .logo img {
@@ -91,12 +137,26 @@ export default {
 .profile {
 	position: relative;
 	display: flex;
-	/* padding: 0 25px; */
 	cursor: pointer;
 }
 
 .profile img {
 	height: 45px;
+}
+
+.rows-container {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 15px;
+	row-gap: 10px;
+}
+
+.param-box {
+	display: flex;
+	flex-direction: column;
+	padding: 5px 10px;
+	border: 1px solid white;
+	border-radius: 12px;
 }
 
 </style>
