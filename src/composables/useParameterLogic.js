@@ -1,3 +1,4 @@
+// src/composables/useParameterLogic.js
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useStore } from 'vuex'
 
@@ -34,11 +35,11 @@ export function useParameterLogic() {
 		}
 	}
 
-	const deleteParameter = id => {
+	const deleteParameter = (id) => {
 		store.dispatch('parameters/deleteParameter', id)
 	}
 
-	const updateParameter = async id => {
+	const updateParameter = async (id) => {
 		await store.dispatch('parameters/updateParameter', { id, data: editedParam.value })
 		editingParamId.value = null // Disable editing mode
 	}
@@ -47,9 +48,13 @@ export function useParameterLogic() {
 		sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
 	}
 
-	const enableEdit = param => {
+	const enableEdit = (param) => {
 		editingParamId.value = param.id
 		editedParam.value = { ...param }
+	}
+
+	const submitEdit = async (id) => {
+		await updateParameter(id)
 	}
 
 	const showDropdown = () => {
@@ -64,7 +69,7 @@ export function useParameterLogic() {
 		isMobile.value = window.innerWidth <= 768
 	}
 
-	const handleClickOutside = event => {
+	const handleClickOutside = (event) => {
 		// Handle clicks outside the dropdown
 		if (!event.target.closest('.profile')) {
 			hideDropdown()
@@ -96,6 +101,7 @@ export function useParameterLogic() {
 		updateParameter,
 		toggleSort,
 		enableEdit,
+		submitEdit,
 		showDropdown,
 		hideDropdown,
 		checkMobile,
