@@ -89,7 +89,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	min-width: 18vw;
+	min-width: 300px;
 }
 
 input {
@@ -128,9 +128,9 @@ button {
 	background: linear-gradient(to bottom, rgb(82, 102, 217), rgb(61, 78, 183));
 	width: 100%;
 	color: #fff;
-	padding: 10px 20px;
+	padding: 14px 20px;
 	border: none;
-	border-radius: 5px;
+	border-radius: 8px;
 	cursor: pointer;
 	font-family: 'Gilmer', sans-serif;
 	font-weight: bold;
@@ -142,19 +142,20 @@ button {
 	font-size: 16px;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-device-width: 768px) {
 	.logo {
-		max-width: 150px;
-		margin-bottom: 20px;
+		max-width: min(50vw, 250px);
 	}
-	.copyright {
-		font-size: 0.8rem;
-		text-wrap: nowrap;
+	.signin-container {
+		width: 90vw;
 	}
 
-	h2 {
-		font-size: 20px;
-		text-wrap: nowrap;
+	.signin-box {
+		width: 100%;
+	}
+
+	.input-container {
+		min-width: min(300px, 50vw);
 	}
 }
 </style>
