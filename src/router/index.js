@@ -10,8 +10,7 @@ const routes = [
   {
     path: '/signin',
     name: 'SignIn',
-		// Route Level code-splitting
-		// This will generate a separate chunk which will be lazy-loaded when the route is visited.
+		// Lazy load for performance
     component: () => import('../views/SignIn.vue'),
   },
 ];
