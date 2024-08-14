@@ -60,7 +60,7 @@
 						<span v-else>{{ param.description }}</span>
 					</div>
 					<div class="column">
-						{{ new Date(param.created._seconds * 1000).toLocaleDateString() }}
+						{{ new Date(param.created._seconds * 1000).toLocaleString() }}
 						<div v-if="param.last_updated">
 							<small
 								>Last updated:
