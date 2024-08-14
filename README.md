@@ -29,25 +29,24 @@ Create a .env file in the root of your project with the following variables:
 - **FOR EASE OF USE ONLY,** I've included my own Firebase credentials to speed up setup time. You can just copy the contents from `.env.example` file included in project root.
 
 ### Installation
-1. Clone the repository:
-git clone ...
+1. Clone the repository:\
+`https://gitlab.com/cortexconfig/visionary.git`
 
-2. Install dependencies
-npm install
+2. Install dependencies:\
+`npm install`
 
-3. Run the development server
-npm run serve
+3. Run the development server:\
+`npm run serve`
 
-NOTE: To run the project locally, you need to run the backend project (neuralbase) in your local environment
+	*To run the project locally, you need to run the backend project [NeuralBase](https://gitlab.com/cortexconfig/NeuralBase) in your local environment.*
 
-4. Build for production
-npm run build
+4. Build for production:\
+`npm run build`
 
 
 ### Deployment
-1. Set up environment variables: Ensure your .env file is correctly set up with your Firebase credentials.
-2. Build the project
-npm run build
+1. Set up environment variables: Ensure your `.env` file is correctly set up with your Firebase credentials.
+2. Build the project with `npm run build`
 3. Deploy to a static hosting service:
 	- You can deploy the `dist` folder to any static hosting service like Netlify, Vercel, or Firebase Hosting.
 
