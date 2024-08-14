@@ -76,8 +76,25 @@
 				</div>
 
 			</div>
+
+			<!-- Add New Parameter -->
 			<div class="param-box add-new">
-				<!-- add new param form for mobile layout -->
+				
+				<div class="row">
+					<input v-model="newParam.key" type="text" placeholder="New Parameter" />
+				</div>
+
+				<div class="row">
+					<input v-model="newParam.key" type="text" placeholder="Value" />
+				</div>
+
+				<div class="row">
+					<input v-model="newParam.key" type="text" placeholder="New Description" />
+				</div>
+
+				<div class="row actions">
+					<button @click="createParameter" class="add-btn">ADD</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -129,6 +146,7 @@ export default {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	font-family: 'Gilmer';
 }
 
 .navbar {
@@ -174,4 +192,55 @@ export default {
 	color: white
 }
 
+.actions {
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+}
+
+button {
+	border: none;
+	border-radius: 4px;
+	color: white;
+	font-weight: bolder;
+	width: min-content;
+	align-self: center;
+	margin-top: 5px;
+	padding: 3px 8px;
+}
+
+.edit-btn {
+	background: linear-gradient(to bottom, rgb(64, 115, 236), rgb(60, 104, 236));
+}
+
+.delete-btn {
+	background: linear-gradient(to bottom, rgb(225, 85, 96), rgb(220, 67, 50));
+}
+
+.add-btn {
+	background: linear-gradient(to bottom, rgb(92, 200, 212), rgb(73, 162, 228));
+}
+
+.add-new .row {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.add-new input {
+	padding: 5px;
+	border: 1px solid #444;
+	border-radius: 4px;
+	background: none;
+}
+
+.row input {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #444;
+	border-radius: 4px;
+	background: none;
+	color: white;
+	font-family: 'Gilmer';
+}
 </style>
