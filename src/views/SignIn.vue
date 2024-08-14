@@ -62,12 +62,12 @@ export default {
 	font-family: 'Gilmer', sans-serif;
 	height: auto;
 	width: auto;
-	margin-bottom: 100px;
+	margin-bottom: 200px;
 }
 
 .logo {
 	max-width: 250px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 h2 {
@@ -81,16 +81,15 @@ h2 {
 	flex-direction: column;
 	align-items: center;
 	border-radius: 10px;
-	padding: 20px;
+	padding: 30px;
 	text-align: center;
-	min-width: 30vw;
 }
 
 .input-container {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	min-width: 15vw;
+	min-width: 18vw;
 }
 
 input {
@@ -102,13 +101,13 @@ input {
 }
 
 input:nth-child(1) {
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
 }
 
 input:nth-child(2) {
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 input:focus {
@@ -140,7 +139,7 @@ button {
 .copyright {
 	color: #777;
 	margin-top: 6vh;
-	font-size: 1rem;
+	font-size: 16px;
 }
 
 /* @TODO: Implement media queries */
