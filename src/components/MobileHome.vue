@@ -6,11 +6,10 @@
 				<img src="../assets//icon.png" alt="Codeway Logo" />
 			</div>
 
-			<div class="profile" @mouseenter="showDropdown" @mouseleave="hideDropdown">
-				<img src="../assets/profile-icon.png" alt="Profile Logo" />
-				<!-- @TODO: check issue below -->
-				<div class="dropdown-menu"> 
-					<button @click="signOut" class="dropdown-item">Sign Out</button>
+			<div class="profile" @click.stop="toggleDropdown">
+				<img v-if="!isDropdownVisible" src="../assets/profile-icon.png" alt="Profile Logo" />
+				<div v-else class="dropdown-menu"> 
+					<button @click.stop="signOut" class="dropdown-item">Sign Out</button>
 				</div>
 			</div>
 		</nav>
@@ -136,6 +135,22 @@ export default {
 			signOut,
 		}
 	},
+	methods: {
+		toggleDropdown() {
+			this.isDropdownVisible = !this.isDropdownVisible
+		},
+		hideDropdown() {
+			if (this.isDropdownVisible) {
+				this.isDropdownVisible = false
+			}
+		},
+		handleClickOutside(event) {
+			const profileEl = this.$el.querySelector('.profile')
+			if (!profileEl.contains(event.target)) {
+				this.hideDropdown()
+			}
+		}
+	}
 }
 </script>
 
