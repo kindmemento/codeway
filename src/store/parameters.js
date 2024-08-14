@@ -52,8 +52,6 @@ export default {
 		},
 		async updateParameter({ commit }, { id, data }) {
 			try {
-				console.log("param id", id)
-				console.log("req body", data)
 				const response = await apiService.updateParameter(id, data)
 				commit('updateParameter', response.data)
 			} catch (error) {
