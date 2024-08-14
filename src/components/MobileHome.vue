@@ -26,7 +26,10 @@
 							type="text"
 							:placeholder="param.key"
 						/>
-						<span v-else>{{ param.key }}</span>
+						<span v-else>
+							<span class="key">Parameter Key:</span>
+							{{ param.key }}
+						</span>
 				</div>
 
 				<div class="row">
@@ -36,7 +39,10 @@
 							type="text"
 							:placeholder="param.value"
 						/>
-						<span v-else>{{ param.value }}</span>
+						<span v-else>
+							<span class="key">Value:</span>
+							{{ param.value }}
+						</span>
 				</div>
 
 				<div class="row">
@@ -46,10 +52,14 @@
 							type="text"
 							:placeholder="param.description"
 						/>
-						<span class="description-span" v-else>{{ param.description }}</span>
+						<span class="description-span" v-else>
+							<span class="key">Description:</span>
+							{{ param.description }}
+						</span>
 				</div>
 
 				<div class="row">
+					<span class="key">Create Date:</span>
 					{{ new Date(param.created._seconds * 1000).toLocaleString() }}
 				</div>
 
@@ -157,6 +167,11 @@ export default {
 	padding: 5px 10px;
 	border: 1px solid white;
 	border-radius: 12px;
+}
+
+.key {
+	font-weight: bolder;
+	color: white
 }
 
 </style>
