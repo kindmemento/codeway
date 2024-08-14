@@ -4,11 +4,17 @@
 		<div class="signin-box">
 			<h2>Please sign in</h2>
 			<form @submit.prevent="signIn">
-				<input type="email" placeholder="E-mail address" v-model="email" required />
-				<input type="password" placeholder="Password" v-model="password" required />
-				<button type="submit">Sign in</button>
+				<div class="input-container">
+					<input type="email" placeholder="E-mail address" v-model="email" required />
+					<input type="password" placeholder="Password" v-model="password" required />
+				</div>
+				<div class="button-container">
+					<button type="submit">Sign in</button>
+				</div>
 			</form>
-			<p>Codeway © 2021</p>
+			<div class="copyright">
+				<p>Codeway © 2021</p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -47,72 +53,105 @@ export default {
 }
 </script>
 
-<!-- @TODO:
-	Enhance styling to
-	- match sample
-	- be responsive
--->
 <style scoped>
 .signin-container {
-	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	position: relative;
-	border: 5px solid green;
+	height: 100vh;
+	font-family: 'Gilmer', sans-serif;
+	min-width: 50vw;
 }
 
 .logo {
-	width: 14.5vw;
-	height: 16.5vh;
-	margin-bottom: 3vh;
+	max-width: 200px;
+	margin-bottom: 20px;
+}
+
+h2 {
+	color: rgb(50, 50, 91);
+	margin-bottom: 25px;
+	font-size: 24px;
 }
 
 .signin-box {
-	width: 16.8vw;
-	height: 22.1vh;
-	padding: 2vh;
 	border-radius: 10px;
+	padding: 20px;
+	text-align: center;
+}
+
+.title {
+	color: #fff;
+	margin-bottom: 20px;
+}
+
+.input-container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border: 3px solid red;
+	width: 30vw;
 }
 
 input {
-	margin-bottom: 15px;
-	padding: 10px;
-	border-radius: 4px;
-	border: 1px solid #444;
-	background-color: #2c2c2c;
-	color: #fff;
+	width: 100%;
+	padding: 10px 8px;
+	border: 1px solid rgb(47, 54, 83);
+	background: none;
+	color: rgb(110, 116, 123);
 }
 
-input::placeholder {
-	color: #888;
+input:nth-child(1) {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+input:nth-child(2) {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+input:focus {
+	border-color: rgb(216, 92, 204);
+	outline: none;
+}
+
+.button-container {
+	margin-top: 10px;
 }
 
 button {
-	padding: 10px;
-	background-color: #3b82f6;
-	border: none;
-	border-radius: 4px;
+	background: linear-gradient(to bottom, rgb(82, 102, 217), rgb(61, 78, 183));
+	width: 100%;
 	color: #fff;
-	font-weight: bold;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
 	cursor: pointer;
-	transition: background-color 0.3s;
+	font-family: 'Gilmer', sans-serif;
+	font-weight: bold;
 }
 
-button:hover {
-	background-color: #2563eb;
-}
-
-p {
-	margin-top: 20px;
+.copyright {
 	color: #777;
-	font-size: 0.8rem;
+	margin-top: 6vh;
+	font-size: 1rem;
+}
+
+/* @TODO: Implement media queries */
+/* Media queries for responsiveness */
+@media (min-width: 576px) {
+	.signin-container {
+		height: auto;
+		padding: 20px;
+	}
+
+	.signin-box {
+		max-width: 400px;
+		padding: 30px;
+	}
+}
+
+@media (min-width: 768px) {
+	/* Add styles for larger screens */
 }
 </style>
