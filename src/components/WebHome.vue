@@ -18,10 +18,10 @@
 		<div class="body-container">
 			<!-- Header -->
 			<div class="header">
-				<div class="column">Parameter Key</div>
-				<div class="column">Value</div>
-				<div class="column">Description</div>
-				<div class="column" v-on:click="toggleSort">
+				<div class="column key-column">Parameter Key</div>
+				<div class="column value-column">Value</div>
+				<div class="column description-column">Description</div>
+				<div class="column date-column" v-on:click="toggleSort">
 					Create Date
 					<span v-if="sortOrder === 'desc'">⬇️</span>
 					<span v-else>⬆️</span>
@@ -50,23 +50,17 @@
 						/>
 						<span v-else>{{ param.value }}</span>
 					</div>
-					<div class="column">
+					<div class="column description-column">
 						<input
 							v-if="param.id === editingParamId"
 							v-model="editedParam.description"
 							type="text"
 							:placeholder="param.description"
 						/>
-						<span v-else>{{ param.description }}</span>
+						<span class="description-span" v-else>{{ param.description }}</span>
 					</div>
 					<div class="column">
 						{{ new Date(param.created._seconds * 1000).toLocaleString() }}
-						<div v-if="param.last_updated">
-							<small
-								>Last updated:
-								{{ new Date(param.last_updated._seconds * 1000).toLocaleString() }}
-							</small>
-						</div>
 					</div>
 
 					<div class="column actions">
@@ -173,6 +167,7 @@ export default {
 	position: relative;
 	display: flex;
 	padding: 0 25px;
+	cursor: pointer;
 }
 
 .profile img {
@@ -240,15 +235,31 @@ export default {
 }
 
 .row .column {
+	display: flex;
+	align-items: center;
 	flex: 1;
 	text-align: left;
 	font-size: 16px;
 	font-family: 'Gilmer';
 }
 
+.description-column {
+	/* border: 1px solid red; */
+	margin-right: 20px;
+}
+
+.description-span {
+	display: flex;
+	flex: 2;
+	/* white-space: nowrap; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	max-width: 100%;
+}
+
 .column .actions {
 	display: flex;
-	justify-content: space-between;
 }
 
 .edit-btn,
@@ -282,6 +293,8 @@ export default {
 }
 
 .add-row-container .column {
+	display: flex;
+	align-items: center;
 	flex: 1;
 }
 
@@ -290,6 +303,7 @@ export default {
 }
 
 .input-container {
+	display: flex;
 	flex: 1;
 	padding: 0.5rem 2rem 0 0;
 }
